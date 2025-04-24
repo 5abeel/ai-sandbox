@@ -28,3 +28,16 @@ make install
 
 ln -s /usr/local/lib/libtcmalloc.so.4 /lib/
 ldconfig
+
+# Verify the installation
+snort -V
+
+# Install Snort DAQ (Data Acquisition Library)
+cd ~/snort-source-files
+git clone https://github.com/snort3/libdaq.git
+cd libdaq
+./bootstrap
+./configure
+make
+make install
+ldconfig
