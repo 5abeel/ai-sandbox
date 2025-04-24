@@ -126,3 +126,10 @@ EOF
 systemctl daemon-reload
 systemctl enable --now snort3
 
+## Notes:
+
+# >> had to re-compile and re-build the libdaq library after all install steps (then I saw the /usr/local/lib/daq/daq_pcap.so file)
+#	>> Even with that, I see error with just 
+#		snort -c /usr/local/etc/snort/snort.lua -T
+#	>> Need to specify the DAQ directory when running Snort
+#		snort -c /usr/local/etc/snort/snort.lua -T --daq-dir=/usr/local/lib/daq/
