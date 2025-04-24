@@ -133,3 +133,11 @@ systemctl enable --now snort3
 #		snort -c /usr/local/etc/snort/snort.lua -T
 #	>> Need to specify the DAQ directory when running Snort
 #		snort -c /usr/local/etc/snort/snort.lua -T --daq-dir=/usr/local/lib/daq/
+
+
+# Verify configuration
+snort -c /usr/local/etc/snort/snort.lua --daq-dir=/usr/local/lib/daq/ --plugin-path=/usr/local/lib/snort_extra/ --warn-all
+
+# Run Snort (foreground)
+snort -c /usr/local/etc/snort/snort.lua --daq-dir=/usr/local/lib/daq/ -i enp0s1f0d3 -A alert_fast -l /var/log/snort --plugin-path=/usr/local/lib/snort_extra/ -v
+
