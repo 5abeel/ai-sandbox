@@ -4,7 +4,6 @@
 dnf install epel-release
 dnf config-manager --enable crb
 
-
 # Install required build tools and dependencies
 dnf -y install cmake gcc-c++ bison flex libtool nghttp2 libnghttp2-devel \
     libpcap-devel pcre-devel openssl-devel libdnet-devel \
