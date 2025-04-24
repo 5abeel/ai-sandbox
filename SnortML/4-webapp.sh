@@ -52,4 +52,3 @@ EOF
 # Set permissions for the web app
 chown -R apache:apache /var/www/html/
 chmod -R 755 /var/www/html/
-
