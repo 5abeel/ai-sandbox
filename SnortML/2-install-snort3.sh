@@ -22,8 +22,8 @@ cd snort3-3.1.82.0
 ./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc
 cd build
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig:/usr/local/lib/pkgconfig
-make -j $(nproc)
-#### if above hangs, just run 'make' (without parallel threads)
+## make -j $(nproc) ## this usually hangs (atleast it does, on RL9.x). Run single thread instead
+make
 make install
 
 ln -s /usr/local/lib/libtcmalloc.so.4 /lib/
