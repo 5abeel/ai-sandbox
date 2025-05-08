@@ -1,3 +1,22 @@
+
+###############################################################################
+############## 3a-snortml.sh
+
+### DB running on ACC (10.10.0.2)
+### Snort montoring the 10.10.0.2 interface
+### SQL client running on the host
+
+
+                HOST                                    ACC                             
+============================          =========================================
+
+       (SQL Client)                        (Snort & DB)
+        ens801f0d3 ----------------------> enp0s1f0d3
+        10.10.0.3                           10.10.0.2
+
+
+###############################################################################
+
 # Install dependencies for SnortML
 
 # Install Python and TensorFlow

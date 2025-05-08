@@ -7,7 +7,7 @@
 apt-get update
 apt-get install -y sqlmap curl wget python3 python3-pip
 
-# For RHEL/CentOS/Rocky
+# For RHEL/Fedora/Rocky
 dnf install -y epel-release
 dnf install -y sqlmap curl wget python3 python3-pip
 
