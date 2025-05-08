@@ -1,7 +1,7 @@
 # Install dependencies for SnortML
 
 # Install Python and TensorFlow
-dnf install python3 python3-pip
+dnf install -y python3 python3-pip
 pip3 install tensorflow numpy
 
 # Create a directory for our model
