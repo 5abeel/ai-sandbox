@@ -2,7 +2,7 @@
 # in order to test SQL injection attacks
 
 # Install Apache and PHP
-dnf install httpd php php-mysqlnd mariadb-server -y
+dnf install -y httpd php php-mysqlnd mariadb-server
 
 # Start and enable services
 systemctl enable --now httpd
