@@ -11,7 +11,9 @@ cd libdaq
 make
 make install
 
+ln -s /usr/local/lib/libtcmalloc.so.4 /lib/
 ln -s /usr/local/lib/libdaq.so.3 /lib/
+echo "/usr/local/lib/" > /etc/ld.so.conf.d/libdaq3.conf
 ldconfig
 
 ## Install Snort3
