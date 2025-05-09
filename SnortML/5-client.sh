@@ -7,7 +7,7 @@
 apt-get update
 apt-get install -y sqlmap curl wget python3 python3-pip
 
-# For RHEL/Fedora/Rocky
+# For RHEL/Centos/Rocky
 dnf install -y epel-release
 dnf install -y sqlmap curl wget python3 python3-pip
 
@@ -41,7 +41,7 @@ def log_request(request_num, is_attack, payload, response_code):
 
 def main():
     parser = argparse.ArgumentParser(description='SQL Injection Test Generator')
-    parser.add_argument('--target', required=True, help='Target URL (e.g., http://192.168.1.2/vulnerable.php)')
+    parser.add_argument('--target', required=True, help='Target URL (e.g., http://192.168.1.101/vulnerable.php)')
     parser.add_argument('--param', default='id', help='Parameter name to inject (default: id)')
     parser.add_argument('--delay', type=float, default=0.5, help='Delay between requests in seconds (default: 0.5)')
     args = parser.parse_args()
