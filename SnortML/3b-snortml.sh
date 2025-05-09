@@ -146,11 +146,11 @@ snort_ml = {
 -- Add traditional SQL injection rules
 ips = {
     rules = [[
-        alert tcp any any -> $HOME_NET any (msg:"SQL Injection Attempt - Single Quote"; flow:to_server,established; service:http; http_uri; content:"%27"; sid:1000001; rev:1;)
-        alert tcp any any -> $HOME_NET any (msg:"SQL Injection Attempt - Double Quote"; flow:to_server,established; service:http; http_uri; content:"%22"; sid:1000002; rev:1;)
-        alert tcp any any -> $HOME_NET any (msg:"SQL Injection Attempt - OR Operator"; flow:to_server,established; service:http; http_uri; content:"OR",nocase; sid:1000003; rev:1;)
-        alert tcp any any -> $HOME_NET any (msg:"SQL Injection Attempt - UNION"; flow:to_server,established; service:http; http_uri; content:"UNION",nocase; sid:1000004; rev:1;)
-        alert tcp any any -> $HOME_NET any (msg:"SQL Injection Attempt - DROP Statement"; flow:to_server,established; service:http; http_uri; content:"DROP",nocase; sid:1000006; rev:1;)
+        alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection Attempt - Single Quote"; content:"%27"; sid:1000001; rev:1;)
+        alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection Attempt - Double Quote"; content:"%22"; sid:1000002; rev:1;)
+        alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection Attempt - OR Operator"; content:"OR",nocase; sid:1000003; rev:1;)
+        alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection Attempt - UNION"; content:"UNION",nocase; sid:1000004; rev:1;)
+        alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection Attempt - DROP Statement"; content:"DROP",nocase; sid:1000006; rev:1;)
     ]],
     variables = default_variables
 }
@@ -167,9 +167,6 @@ EOF
 snort -c /usr/local/etc/snort/snort.lua --daq-dir=/usr/local/lib/daq/ --plugin-path=/usr/local/lib/snort_extra/ --warn-all
 
 # Run Snort (foreground)
-snort -c /usr/local/etc/snort/snort.lua --daq-dir=/usr/local/lib/daq/ \
-  --plugin-path=/usr/local/lib/snort_extra/ \
-  -i snort-tap \
-  --daq afpacket \
-  -A alert_fast -l /var/log/snort -v
+snort -c /usr/local/etc/snort/snort.lua --daq-dir=/usr/local/lib/daq/ -i snort-int -A alert_fast -l /var/log/snort --plugin-path=/usr/local/lib/snort_extra/ -v
 
+## optional arg (to change daq/pcap):   --daq afpacket 
