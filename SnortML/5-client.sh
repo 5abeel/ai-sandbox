@@ -11,22 +11,24 @@ apt-get install -y sqlmap curl wget python3 python3-pip
 dnf install -y epel-release
 dnf install -y sqlmap curl wget python3 python3-pip
 
+# Test no attack (benign) requests
+curl --noproxy "*" http://192.168.1.101/vulnerable.php
 
 # Test with a single quote (basic SQL injection attempt)
 curl --noproxy "*" http://192.168.1.101/vulnerable.php?id=1%27
 
 # Test with a UNION statement
-curl --noproxy "*" http://10.10.0.2/vulnerable.php?id=1%20UNION%20SELECT%201,2,3
+curl --noproxy "*" http://192.168.1.101/vulnerable.php?id=1%20UNION%20SELECT%201,2,3
 
 # Test with an OR statement
-curl --noproxy "*" http://10.10.0.2/vulnerable.php?id=1%20OR%201=1
+curl --noproxy "*" http://192.168.1.101/vulnerable.php?id=1%20OR%201=1
 
 
 ##### Test with script for automated SQL injection attempts #####
 ## This script generates a series of requests to the target URL
-## with both normal and attack payloads (approx 5/100 are attacks)
+## with both normal and attack payloads (5% are attacks)
 
-cat > test_sql_injection.sh << 'EOF'
+cat > test_sql_injection.py << 'EOF'
 import requests
 import random
 import time
