@@ -1,7 +1,7 @@
 # full-bringup with slow-path
 
 # dont need OVS. Snort will be inline and will bridge the traffic
-pkill ovs 
+pkill ovs
 
 # Set interfaces in promiscuous mode
 ip link set enp0s1f0d5 up promisc on
