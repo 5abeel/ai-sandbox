@@ -33,5 +33,5 @@ curl --noproxy "*" http://192.168.1.101/vulnerable.php?id=1%20OR%201=1
 
 
 # Run script (100 requests with 5% attack payloads)
-python3 test_sql_injection.py --target=http://192.168.1.101/vulnerable.php
+python3 test_sql_injection.py --target http://192.168.1.101/vulnerable.php  --delay 0.5
 
