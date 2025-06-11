@@ -1,6 +1,6 @@
 # Install required dependencies for Snort3 on RL9.x
 
-# Install EPEL and enable PowerTools repositories
+# Install EPEL and enable CRB repositories
 dnf install epel-release
 dnf config-manager --enable crb
 
