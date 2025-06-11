@@ -4,6 +4,9 @@
 Seems like it is due to AF_PACKET DAQ and the Tx ring queues not getting properly setup/allocated.
 
 Commands tried:
+https://www.perplexity.ai/search/i-have-recreated-all-steps-fro-omQqFcRFRRaeY.F4CAUTAw?0=r#17
+
+Also notes that /proc/buddyinfo shows fragmented memory, which can cause issues with the Tx ring allocation.
 
 
 snort -c /usr/local/etc/snort/snort.lua \
