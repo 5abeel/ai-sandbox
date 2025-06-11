@@ -119,3 +119,7 @@ def main():
 if __name__ == "__main__":
     main()
 EOF
+
+
+# Run script
+python3 test_sql_injection.py --target http://192.168.1.101/vulnerable.php  --delay 0.5
