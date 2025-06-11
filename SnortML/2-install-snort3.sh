@@ -3,7 +3,7 @@
 mkdir -p ~/snort-source-files
 cd ~/snort-source-files
 
-## libdaq is a required dependency
+# Install Snort DAQ (Data Acquisition Library)
 git clone https://github.com/snort3/libdaq.git
 cd libdaq
 ./bootstrap
@@ -33,17 +33,6 @@ ldconfig
 
 # Verify the installation
 snort -V
-
-# Install Snort DAQ (Data Acquisition Library)
-cd ~/snort-source-files
-git clone https://github.com/snort3/libdaq.git
-cd libdaq
-./bootstrap
-./configure
-make
-make install
-ldconfig
-
 
 # Create a user for the Snort service
 useradd -r -s /usr/sbin/nologin -M snort
