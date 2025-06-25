@@ -1,0 +1,74 @@
+Setup is MCP Client on host and MCP server on ACC
+
+    Host                            ACC
+=============                   ============
+  MCP Client ------------------> MCP Server
+
+
+Prereqs
+=======
+
+1. Python 3.11 installed on both Host and ACC
+
+
+# Update system packages
+sudo dnf update -y
+
+# Install Python 3.11+ and development tools
+sudo dnf install -y git python3.11 python3.11-pip python3.11-devel
+pip install --upgrade pip
+
+
+# Install additional tools for network communication
+sudo dnf install -y nc telnet
+
+
+mkdir -p ~/mcp-security-server
+cd ~/mcp-security-server
+
+python3 -m venv mcp-env
+source mcp-env/bin/activate
+
+pip install mcp fastmcp watchdog python-dateutil
+
+
+Client
+======
+
+
+# Update system
+sudo dnf update -y
+
+# Install Python and development tools
+sudo dnf install -y python3 python3-pip python3-devel git
+
+# Create client directory
+mkdir -p ~/mcp-security-client
+cd ~/mcp-security-client
+
+# Create virtual environment
+python3 -m venv client-env
+source client-env/bin/activate
+
+
+pip install langchain langchain-openai langchain-community python-dotenv asyncio-mqtt
+
+=======================================
+
+
+# Setting 3.11 version as default
+
+# Install alternatives
+sudo dnf install alternatives -y
+
+# Add Python alternatives
+sudo alternatives --install /usr/bin/python python /usr/bin/python3.9 1
+sudo alternatives --install /usr/bin/python python /usr/bin/python3.11 2
+
+# Configure default (choose option 2 for Python 3.11)
+sudo alternatives --config python
+
+# Add pip alternatives
+sudo alternatives --install /usr/bin/pip pip /usr/bin/pip3.9 1
+sudo alternatives --install /usr/bin/pip pip /usr/bin/pip3.11 2
+sudo alternatives --config pip
