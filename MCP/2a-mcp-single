@@ -1,0 +1,83 @@
+
+
+## Get an alert from journalctl
+
+### On server (ACC)
+
+cat > /root/mcp-security-server/server.py << 'EOF'
+from mcp.server.fastmcp import FastMCP
+import subprocess
+
+mcp = FastMCP("Log Alert Server")
+
+@mcp.tool()
+def get_journal_alerts(keyword: str = "alert") -> str:
+    """
+    Search for alert messages in system logs using journalctl.
+    """
+    try:
+        # Customize the journalctl command as needed
+        result = subprocess.run(
+            ["journalctl", "--no-pager", "-p", "alert", "-n", "20"],
+            capture_output=True,
+            text=True
+        )
+        return result.stdout if result.stdout else "No alerts found."
+    except Exception as e:
+        return f"Error: {e}"
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
+
+EOF
+
+
+# Run server
+python server.py
+
+### On client (host)
+
+cat > /root/mcp-security-client/client.py << 'EOF'
+import asyncio
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+async def main():
+    # This section is now corrected to use the virtual environment's Python
+    server_params = StdioServerParameters(
+        command="ssh",
+        args=[
+            "root@10.10.0.2",
+            "/root/mcp-security-server/venv/bin/python",
+            "/root/mcp-security-server/server.py"
+        ]
+    )
+
+    print("Attempting to connect to the MCP server...")
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            print("✅ Connection successful!")
+            print("Calling tool 'get_journal_alerts'...")
+
+            # Call the tool
+            response = await session.call_tool("get_journal_alerts", {"keyword": "alert"})
+
+            print("\n--- Server Response ---")
+            print(response)
+            print("-----------------------")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+EOF
+
+
+
+# Run client
+python client.py
+
+
+
+### Test -- add an alert log in journalctl
+logger -p user.alert "This is a test alert message for the MCP agent"
+
