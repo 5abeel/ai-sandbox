@@ -26,8 +26,8 @@ sudo dnf install -y nc telnet
 mkdir -p ~/mcp-security-server
 cd ~/mcp-security-server
 
-python3 -m venv mcp-env
-source mcp-env/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 
 pip install mcp fastmcp watchdog python-dateutil
 
@@ -47,8 +47,9 @@ mkdir -p ~/mcp-security-client
 cd ~/mcp-security-client
 
 # Create virtual environment
-python3 -m venv client-env
-source client-env/bin/activate
+python3 -m venv venv
+source venv/bin/activate
+
 
 
 pip install langchain langchain-openai langchain-community python-dotenv asyncio-mqtt

@@ -33,6 +33,7 @@ EOF
 
 
 # Run server
+source venv/bin/activate
 python server.py
 
 ### On client (host)
@@ -74,6 +75,7 @@ EOF
 
 
 # Run client
+source venv/bin/activate
 python client.py
 
 
