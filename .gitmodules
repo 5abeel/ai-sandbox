@@ -1,0 +1,3 @@
+[submodule "papers/anomaly-detection-resources"]
+	path = papers/anomaly-detection-resources
+	url = https://github.com/5abeel/anomaly-detection-resources
