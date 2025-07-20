@@ -1,3 +1,4 @@
-# intel-docs
+# ai-sandbox
 
-Docs from my Intel tenure
+AI playground sandbox
+
