@@ -1,7 +1,5 @@
 # Simple RL agent - agent takes random actions
 
-cat > cartpole.py << 'EOF'
-
 import gymnasium as gym
 import time
 import matplotlib.pyplot as plt
@@ -35,5 +33,3 @@ plt.xticks(episodes)
 plt.grid(True)
 # plt.show() ## cannot be displayed in this env, save png in pwd instead
 plt.savefig("rewards_plot.png")
-
-EOF
