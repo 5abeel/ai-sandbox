@@ -10,7 +10,7 @@ env = gym.make('CartPole-v1', render_mode='human')
 episode_rewards = []
 
 for episode in range(10): # Run 10 episodes
-    observation, info = env.reset()
+    observation, info = env.reset() # env.reset() returns observation, which is initial state (position, velocity etc.)
     total_reward = 0
     for _ in range(1000):
         action = env.action_space.sample()  # Random
