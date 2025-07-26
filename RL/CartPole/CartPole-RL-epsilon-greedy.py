@@ -39,7 +39,10 @@ def discretize_observation(obs):
     return state # return the state (a tuple of 4 integers, one for each observation variable)
 
 # Q-learning equation
+# 
 # Q(s, a) = Q(s, a) + α * (r + γ * max_a' Q(s', a') - Q(s, a))
+# Q[state, action] = Q[state, action] + alpha * (reward + gamma * max(Q[next_state]) - Q[state, action])
+#
 
 # Q-learning parameters
 alpha = 0.1  # Learning rate
