@@ -112,3 +112,15 @@ plt.grid(True)
 plt.savefig("cartpole_qlearning_rewards.png")
 # plt.show() ## cannot be displayed in this env
 print("Plot saved as cartpole_qlearning_rewards.png")
+
+#
+# Comments & Notes:
+#   This may look like just a feedback loop with specific rules coded instead of ML, but there is a subtlety to it.
+#   1. We do not program what the "right" action is.
+#   2. Here, the agent learns from the environment with a blank Q-table and fills it with knowledge over time.
+#   3. The rules define the learning, not behavior (we do not program "if pole falls left, do this action" etc)
+#   4. Over time, agent's behavior changes as it learns.
+#   5. If environment changes (modify physics, add noise etc), agent can relearn and adapt to the new environment,
+#      (in classic algos, if world changes, code needs to change too).
+#   6. This is the essence of reinforcement learning: learning from interaction with the environment.
+#
